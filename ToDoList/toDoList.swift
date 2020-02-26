@@ -18,6 +18,19 @@ struct ToDo{
 class toDoList: UITableViewController {
     var toDos = [ToDo]()
     
+    override func tableView(_ tableView: UITableView, canEditRowAt
+    indexPath: IndexPath) -> Bool {
+        return true
+    }
+    override func tableView(_ tableView: UITableView, commit
+    editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath:
+    IndexPath) {
+        if editingStyle == .delete {
+            toDos.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        }
+    }
+
     override func tableView(_ tableView: UITableView, cellForRowAt
     indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier:
@@ -39,6 +52,8 @@ class toDoList: UITableViewController {
         } else {
             toDos = toDoList.loadSampleToDos()
         }
+        navigationItem.leftBarButtonItem = editButtonItem
+
     }
     static func loadToDos() -> [ToDo]? {
         return nil
