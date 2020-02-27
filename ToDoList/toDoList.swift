@@ -9,14 +9,41 @@
 import Foundation
 import UIKit
 
-struct ToDo{
+struct ToDo: Codable {
     var title: String
     var isComplete: Bool
     var dueDate: Date
     var notes: String?
+    
+    static let DocumentsDirectory =
+    FileManager.default.urls(for: .documentDirectory,
+    in: .userDomainMask).first!
+    
+    static let ArchiveURL =
+    DocumentsDirectory.appendingPathComponent("todos")
+       .appendingPathExtension("plist")
+    
+    static func saveToDos(_ todos: [ToDo]){
+        let propertyListEncoder = PropertyListEncoder()
+        let codedToDos = try? propertyListEncoder.encode(todos)
+        try? codedToDos?.write(to: ArchiveURL, options: .noFileProtection)
+    }
+    
+    static func loadToDos() -> [ToDo]? {
+         guard let codedToDos = try? Data(contentsOf: ArchiveURL)
+              else {return nil}
+            let propertyListDecoder = PropertyListDecoder()
+            return try? propertyListDecoder.decode(Array<ToDo>.self,
+              from: codedToDos)
+
+    }
+    
+    
 }
 class toDoList: UITableViewController, ToDoCellDelegate {
     var toDos = [ToDo]()
+    
+    
     
     override func tableView(_ tableView: UITableView, canEditRowAt
     indexPath: IndexPath) -> Bool {
@@ -28,6 +55,7 @@ class toDoList: UITableViewController, ToDoCellDelegate {
         if editingStyle == .delete {
             toDos.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
+            ToDo.saveToDos(toDos)
         }
     }
 
@@ -57,7 +85,7 @@ class toDoList: UITableViewController, ToDoCellDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let savedToDos = toDoList.loadToDos(){
+        if let savedToDos = ToDo.loadToDos(){
             toDos = savedToDos
         } else {
             toDos = toDoList.loadSampleToDos()
@@ -65,9 +93,7 @@ class toDoList: UITableViewController, ToDoCellDelegate {
         navigationItem.leftBarButtonItem = editButtonItem
 
     }
-    static func loadToDos() -> [ToDo]? {
-        return nil
-    }
+    
     static func loadSampleToDos() -> [ToDo]{
         let todo1 = ToDo(title: "ToDo One", isComplete: false, dueDate: Date(), notes: "Notes 1")
         
@@ -77,6 +103,8 @@ class toDoList: UITableViewController, ToDoCellDelegate {
         
             return [todo1, todo2, todo3]
     }
+    
+    
 
     @IBAction func unwindToToDoList(segue: UIStoryboardSegue) {
         guard segue.identifier == "saveUnwind" else { return }
@@ -97,7 +125,7 @@ class toDoList: UITableViewController, ToDoCellDelegate {
                     with: .automatic)
                 }
             }
-        
+        ToDo.saveToDos(toDos)
     }
     override func prepare(for segue: UIStoryboardSegue, sender:
     Any?) {
@@ -118,6 +146,7 @@ class toDoList: UITableViewController, ToDoCellDelegate {
                 todo.isComplete = !todo.isComplete
                 toDos[indexPath.row] = todo
                 tableView.reloadRows(at: [indexPath], with: .automatic)
+            ToDo.saveToDos(toDos)
             }
         
     }
