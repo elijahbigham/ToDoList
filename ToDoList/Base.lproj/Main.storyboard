@@ -15,13 +15,37 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ToDoCellIdentifier" id="S4w-NH-NkB">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ToDoCellIdentifier" id="S4w-NH-NkB" customClass="ToDoCell" customModule="ToDoList" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="S4w-NH-NkB" id="98E-wr-dvG">
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="S4w-NH-NkB" id="98E-wr-dvG" customClass="ToDoCell" customModule="ToDoList" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nVA-PZ-pGz">
+                                            <rect key="frame" x="20" y="6.5" width="30" height="30.5"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" image="Unchecked-1.png"/>
+                                            <state key="selected" image="Checked-1.png"/>
+                                            <connections>
+                                                <action selector="completeButtonPressed:" destination="S4w-NH-NkB" eventType="touchUpInside" id="eaA-j5-luR"/>
+                                                <action selector="isCompleteButtoneTapped:" destination="HiY-wI-nZo" eventType="touchUpInside" id="Hq3-y6-iZx"/>
+                                            </connections>
+                                        </button>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TFc-37-hma">
+                                            <rect key="frame" x="70" y="11.5" width="150" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="isCompleteButton" destination="nVA-PZ-pGz" id="sZC-PA-DhV"/>
+                                    <outlet property="titleLabel" destination="TFc-37-hma" id="lru-a0-w6i"/>
+                                    <segue destination="d7J-Ba-EAx" kind="presentation" identifier="EditToDo" id="9eg-y8-236"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -39,12 +63,12 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JVi-ng-3ud" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1378" y="218"/>
+            <point key="canvasLocation" x="1376.8115942028987" y="217.63392857142856"/>
         </scene>
         <!--New ToDo-->
         <scene sceneID="8EN-uC-1Fo">
             <objects>
-                <tableViewController id="HiY-wI-nZo" sceneMemberID="viewController">
+                <tableViewController id="HiY-wI-nZo" customClass="TableViewControllerSub" customModule="ToDoList" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="GfC-ov-NVg">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -59,6 +83,18 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
+                                                <textField opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Remind me to..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="emK-LF-DII">
+                                                    <rect key="frame" x="58" y="5" width="336" height="35"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="34.5" id="eai-UB-Ehx"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <action selector="returnPressed:" destination="HiY-wI-nZo" eventType="primaryActionTriggered" id="zjX-ct-Yi0"/>
+                                                        <action selector="textEditingChanged:" destination="HiY-wI-nZo" eventType="editingChanged" id="chD-DR-6vR"/>
+                                                    </connections>
+                                                </textField>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="my2-b3-oog">
                                                     <rect key="frame" x="20" y="7" width="30" height="30.5"/>
                                                     <constraints>
@@ -67,15 +103,10 @@
                                                     </constraints>
                                                     <state key="normal" image="Unchecked-1.png"/>
                                                     <state key="selected" image="Checked-1.png"/>
+                                                    <connections>
+                                                        <action selector="isCompleteButtoneTapped:" destination="HiY-wI-nZo" eventType="touchUpInside" id="ywn-fM-Hes"/>
+                                                    </connections>
                                                 </button>
-                                                <textField opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Remind me to..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="emK-LF-DII">
-                                                    <rect key="frame" x="58" y="5" width="336" height="35"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="34.5" id="eai-UB-Ehx"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
-                                                </textField>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="emK-LF-DII" firstAttribute="leading" secondItem="my2-b3-oog" secondAttribute="trailing" constant="8" id="6Mj-C7-pkH"/>
@@ -131,6 +162,9 @@
                                             <subviews>
                                                 <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="pti-YZ-j21">
                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="216"/>
+                                                    <connections>
+                                                        <action selector="datePIckerChanged:" destination="HiY-wI-nZo" eventType="primaryActionTriggered" id="0xt-Hs-6pz"/>
+                                                    </connections>
                                                 </datePicker>
                                             </subviews>
                                             <constraints>
@@ -189,6 +223,14 @@
                         </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="dueDateLabel" destination="Dlh-Ky-w5x" id="gVH-6Y-bht"/>
+                        <outlet property="dueDatePickerView" destination="pti-YZ-j21" id="0Cb-PR-Z46"/>
+                        <outlet property="isCompleteButton" destination="my2-b3-oog" id="zdF-na-FIh"/>
+                        <outlet property="notesTextView" destination="C6S-su-iIZ" id="b6M-zn-4zQ"/>
+                        <outlet property="saveButton" destination="hCI-Fb-9xF" id="T5a-qI-rk1"/>
+                        <outlet property="titleTextField" destination="emK-LF-DII" id="h6Z-6U-PMW"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fAp-fS-S3V" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="1kO-qB-lfw" userLabel="Exit" sceneMemberID="exit"/>
@@ -232,4 +274,7 @@
         <image name="Checked-1.png" width="123" height="123"/>
         <image name="Unchecked-1.png" width="123" height="123"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="9eg-y8-236"/>
+    </inferredMetricsTieBreakers>
 </document>
