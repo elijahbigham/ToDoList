@@ -13,6 +13,8 @@
 		512F8B8323FEC3A900869B85 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 512F8B8123FEC3A900869B85 /* Main.storyboard */; };
 		512F8B8523FEC3B700869B85 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 512F8B8423FEC3B700869B85 /* Assets.xcassets */; };
 		512F8B8823FEC3B700869B85 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 512F8B8623FEC3B700869B85 /* LaunchScreen.storyboard */; };
+		51AFB23E240738C20022BBA0 /* Checked-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 51AFB23D240738C20022BBA0 /* Checked-1.png */; };
+		51AFB240240738C80022BBA0 /* Unchecked-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 51AFB23F240738C80022BBA0 /* Unchecked-1.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		512F8B8423FEC3B700869B85 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		512F8B8723FEC3B700869B85 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		512F8B8923FEC3B700869B85 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		51AFB23D240738C20022BBA0 /* Checked-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Checked-1.png"; sourceTree = "<group>"; };
+		51AFB23F240738C80022BBA0 /* Unchecked-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Unchecked-1.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +60,8 @@
 		512F8B7A23FEC3A900869B85 /* ToDoList */ = {
 			isa = PBXGroup;
 			children = (
+				51AFB23F240738C80022BBA0 /* Unchecked-1.png */,
+				51AFB23D240738C20022BBA0 /* Checked-1.png */,
 				512F8B7B23FEC3A900869B85 /* AppDelegate.swift */,
 				512F8B7D23FEC3A900869B85 /* SceneDelegate.swift */,
 				33B1AFD82400267600FA0B94 /* toDoList.swift */,
@@ -93,6 +99,9 @@
 		512F8B7023FEC3A900869B85 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				KnownAssetTags = (
+					check,
+				);
 				LastSwiftUpdateCheck = 1130;
 				LastUpgradeCheck = 1130;
 				ORGANIZATIONNAME = "Bigham, Elijah";
@@ -125,7 +134,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				51AFB240240738C80022BBA0 /* Unchecked-1.png in Resources */,
 				512F8B8823FEC3B700869B85 /* LaunchScreen.storyboard in Resources */,
+				51AFB23E240738C20022BBA0 /* Checked-1.png in Resources */,
 				512F8B8523FEC3B700869B85 /* Assets.xcassets in Resources */,
 				512F8B8323FEC3A900869B85 /* Main.storyboard in Resources */,
 			);
